@@ -1,0 +1,3 @@
+/Users/cvoorhees/Voorhec Software/TermGalaga/build/CMakeFiles/TermGalaga.dir
+/Users/cvoorhees/Voorhec Software/TermGalaga/build/CMakeFiles/edit_cache.dir
+/Users/cvoorhees/Voorhec Software/TermGalaga/build/CMakeFiles/rebuild_cache.dir
