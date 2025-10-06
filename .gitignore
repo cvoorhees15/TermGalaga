@@ -1,0 +1,19 @@
+# Ignore build directory
+/build/
+build/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+compile_commands.json
+CTestTestfile.cmake
+
+# IDE/editor files
+*.swp
+*.swo
+*.user
+*.DS_Store
+.vscode/
+.idea/
