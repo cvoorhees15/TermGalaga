@@ -1,4 +1,5 @@
 #include "../include/GameWindow.h"
+#include <utility>
 
 GameWindow::GameWindow() {
   // initialize ncurses
@@ -36,6 +37,7 @@ void GameWindow::run() {
   while (this->_isRunning) {
     handleInput();
     activePlayer.managePlayerProjectiles();
+    drawBorder();
     refresh();
     usleep(50000);
   }
@@ -47,28 +49,54 @@ void GameWindow::handleInput() {
   // get key input
   int ch = getch();
   int tempX = 0, tempY = 0;
+
+  // get current player position
+  std::pair<int, int> position = activePlayer.getPosition();
+  mvprintw(5, 10, "Position X: %d, Y: %d", position.first, position.second);
+  mvprintw(10, 10, "Height: %d, Width: %d", _screenHeight, _screenWidth);
+
   // update player position
   switch (ch) {
   case KEY_UP:
-    activePlayer.erasePlayer();
-    mvprintw(0, 0, "UP");
-    tempY = -5;
+  {
+    int newY = position.second - 5;
+    if (newY - 1 >= 1 && newY + 1 <= _screenHeight - 2) {
+      activePlayer.erasePlayer();
+      mvprintw(0, 0, "UP");
+      tempY = -5;
+    }
     break;
+  }
   case KEY_DOWN:
-    activePlayer.erasePlayer();
-    mvprintw(0, 0, "DOWN");
-    tempY = 5;
+  {
+    int newY = position.second + 5;
+    if (newY - 1 >= 1 && newY + 1 <= _screenHeight - 2) {
+      activePlayer.erasePlayer();
+      mvprintw(0, 0, "DOWN");
+      tempY = 5;
+    }
     break;
+  }
   case KEY_LEFT:
-    activePlayer.erasePlayer();
-    mvprintw(0, 0, "LEFT");
-    tempX = -5;
+  {
+    int newX = position.first - 5;
+    if (newX - 2 >= 1 && newX + 2 <= _screenWidth - 2) {
+      activePlayer.erasePlayer();
+      mvprintw(0, 0, "LEFT");
+      tempX = -5;
+    }
     break;
+  }
   case KEY_RIGHT:
-    activePlayer.erasePlayer();
-    mvprintw(0, 0, "RIGHT");
-    tempX = 5;
+  {
+    int newX = position.first + 5;
+    if (newX - 2 >= 1 && newX + 2 <= _screenWidth - 2) {
+      activePlayer.erasePlayer();
+      mvprintw(0, 0, "RIGHT");
+      tempX = 5;
+    }
     break;
+  }
   case 32: // SPACE BAR
   {
     activePlayer.firePlayerProjectile();

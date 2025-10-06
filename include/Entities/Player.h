@@ -4,7 +4,7 @@
 // ========================
 // Player entity class
 // ========================
-class Player : Entity {
+class Player : public Entity {
 public:
   Player();
 
